@@ -70,15 +70,15 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="relative min-h-screen overflow-hidden bg-gradient-to-b from-white to-gray-50">
+    <div className="relative min-h-screen overflow-hidden bg-gradient-to-b from-background to-secondary">
       <div className="absolute inset-0 z-[-10] bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:20px_20px] opacity-30"></div>
       
       <Header/>
       <Hero />
 
       {/* Stats Section */}
-      <section className="bg-gradient-to-r from-gray-50 to-gray-100 py-16 relative overflow-hidden">
-        <div className="absolute top-0 inset-0 opacity-10 bg-[url('/grid.svg')] bg-center"></div>
+      <section className="bg-gradient-to-r from-background to-secondary py-16 relative overflow-hidden">
+        <div className="absolute top-0 inset-0 opacity-10 bg-center"></div>
         <motion.div 
           initial="hidden"
           whileInView="visible"
@@ -107,7 +107,7 @@ export default function Home() {
           variants={staggerContainer}
           className="text-center mb-16"
         >
-          <motion.h2 variants={fadeIn} className="text-4xl font-bold mb-4 bg-gradient-to-r from-gray-800 to-gray-900 text-transparent bg-clip-text">How It Works</motion.h2>
+          <motion.h2 variants={fadeIn} className="text-4xl font-bold mb-4 bg-gradient-to-r from-foreground to-foreground/80 text-transparent bg-clip-text">How It Works</motion.h2>
           <motion.p variants={fadeIn} className="text-muted-foreground mb-16 text-lg">Get interview-ready in just 3 simple steps</motion.p>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -131,8 +131,8 @@ export default function Home() {
       </section>
 
       {/* Testimonials */}
-      <section className="bg-gradient-to-b from-gray-50 to-gray-100 py-24 px-4 relative overflow-hidden">
-        <div className="absolute top-0 inset-0 opacity-5 bg-[url('/grid.svg')] bg-center"></div>
+      <section className="bg-gradient-to-b from-background to-secondary py-24 px-4 relative overflow-hidden">
+        <div className="absolute top-0 inset-0 opacity-5 bg-center"></div>
         <motion.div 
           initial="hidden"
           whileInView="visible"
@@ -140,7 +140,7 @@ export default function Home() {
           variants={staggerContainer}
           className="max-w-7xl mx-auto relative z-10"
         >
-          <motion.h2 variants={fadeIn} className="text-4xl font-bold text-center mb-16 bg-gradient-to-r from-gray-800 to-gray-900 text-transparent bg-clip-text">What Our Users Say</motion.h2>
+          <motion.h2 variants={fadeIn} className="text-4xl font-bold text-center mb-16 bg-gradient-to-r from-foreground to-foreground/80 text-transparent bg-clip-text">What Our Users Say</motion.h2>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {testimonials.map((testimonial, index) => (
@@ -187,7 +187,8 @@ export default function Home() {
           variants={staggerContainer}
           className="text-center mb-16"
         >
-          <motion.h2 variants={fadeIn} className="text-4xl font-bold mb-4 bg-gradient-to-r from-gray-800 to-gray-900 text-transparent bg-clip-text">Simple, Transparent Pricing</motion.h2>
+          <motion.h2 variants={fadeIn} className="text-4xl font-bold text-center mb-4 bg-gradient-to-r from-foreground to-foreground/80 text-transparent bg-clip-text">Simple, Transparent Pricing</motion.h2>
+
           <motion.p variants={fadeIn} className="text-muted-foreground text-lg">Choose the plan that fits your needs</motion.p>
         </motion.div>
         
@@ -309,8 +310,8 @@ export default function Home() {
       </section>
 
       {/* FAQ Section */}
-      <section className="bg-gradient-to-b from-gray-50 to-gray-100 py-24 px-4 relative overflow-hidden">
-        <div className="absolute top-0 inset-0 opacity-5 bg-[url('/grid.svg')] bg-center"></div>
+      <section className="bg-gradient-to-b from-background to-secondary py-24 px-4 relative overflow-hidden">
+        <div className="absolute top-0 inset-0 opacity-5 bg-center"></div>
         <motion.div 
           initial="hidden"
           whileInView="visible"
@@ -318,40 +319,40 @@ export default function Home() {
           variants={staggerContainer}
           className="max-w-7xl mx-auto relative z-10"
         >
-          <motion.h2 variants={fadeIn} className="text-4xl font-bold text-center mb-16 bg-gradient-to-r from-gray-800 to-gray-900 text-transparent bg-clip-text">Frequently Asked Questions</motion.h2>
+          <motion.h2 variants={fadeIn} className="text-4xl font-bold text-center mb-16 bg-gradient-to-r from-foreground to-foreground/80 text-transparent bg-clip-text">Frequently Asked Questions</motion.h2>
           
           <motion.div variants={fadeIn} className="space-y-4 max-w-3xl mx-auto">
-            <Accordion type="single" collapsible className="bg-white rounded-lg shadow-sm">
-              <AccordionItem value="item-1" className="border-b border-gray-200">
-                <AccordionTrigger className="py-5 px-6 hover:no-underline hover:bg-gray-50 rounded-t-lg text-lg font-medium">How does the AI interview process work?</AccordionTrigger>
+            <Accordion type="single" collapsible className="bg-background rounded-lg shadow-sm">
+              <AccordionItem value="item-1" className="border-b border-border">
+                <AccordionTrigger className="py-5 px-6 hover:no-underline hover:bg-secondary rounded-t-lg text-lg font-medium">How does the AI interview process work?</AccordionTrigger>
                 <AccordionContent className="px-6 pb-5 pt-2 text-muted-foreground">
                   Our AI interviewer uses advanced natural language processing to conduct realistic interview conversations. It adapts to your responses and provides detailed feedback on your answers, communication style, and areas for improvement.
                 </AccordionContent>
               </AccordionItem>
 
-              <AccordionItem value="item-2" className="border-b border-gray-200">
-                <AccordionTrigger className="py-5 px-6 hover:no-underline hover:bg-gray-50 text-lg font-medium">What types of interviews are supported?</AccordionTrigger>
+              <AccordionItem value="item-2" className="border-b border-border">
+                <AccordionTrigger className="py-5 px-6 hover:no-underline hover:bg-secondary text-lg font-medium">What types of interviews are supported?</AccordionTrigger>
                 <AccordionContent className="px-6 pb-5 pt-2 text-muted-foreground">
                   We support various interview types including technical interviews, behavioral interviews, leadership interviews, and industry-specific interviews across multiple job roles and experience levels.
                 </AccordionContent>
               </AccordionItem>
 
-              <AccordionItem value="item-3" className="border-b border-gray-200">
-                <AccordionTrigger className="py-5 px-6 hover:no-underline hover:bg-gray-50 text-lg font-medium">Can I practice for specific companies?</AccordionTrigger>
+              <AccordionItem value="item-3" className="border-b border-border">
+                <AccordionTrigger className="py-5 px-6 hover:no-underline hover:bg-secondary text-lg font-medium">Can I practice for specific companies?</AccordionTrigger>
                 <AccordionContent className="px-6 pb-5 pt-2 text-muted-foreground">
                   Yes! Our Pro and Enterprise plans allow you to customize interview scenarios based on specific companies, roles, and industries. The AI adapts its questions and feedback to match the company's known interview style.
                 </AccordionContent>
               </AccordionItem>
 
-              <AccordionItem value="item-4" className="border-b border-gray-200">
-                <AccordionTrigger className="py-5 px-6 hover:no-underline hover:bg-gray-50 text-lg font-medium">How accurate is the AI feedback?</AccordionTrigger>
+              <AccordionItem value="item-4" className="border-b border-border">
+                <AccordionTrigger className="py-5 px-6 hover:no-underline hover:bg-secondary text-lg font-medium">How accurate is the AI feedback?</AccordionTrigger>
                 <AccordionContent className="px-6 pb-5 pt-2 text-muted-foreground">
                   Our AI feedback system has been trained on thousands of real interviews and is continuously updated. It provides accurate, actionable feedback that has helped 95% of our users improve their interview performance.
                 </AccordionContent>
               </AccordionItem>
 
               <AccordionItem value="item-5" className="border-b-0">
-                <AccordionTrigger className="py-5 px-6 hover:no-underline hover:bg-gray-50 rounded-b-lg text-lg font-medium">Can I cancel my subscription anytime?</AccordionTrigger>
+                <AccordionTrigger className="py-5 px-6 hover:no-underline hover:bg-secondary rounded-b-lg text-lg font-medium">Can I cancel my subscription anytime?</AccordionTrigger>
                 <AccordionContent className="px-6 pb-5 pt-2 text-muted-foreground">
                   Yes, you can cancel your subscription at any time. We offer a no-questions-asked refund policy within the first 14 days of your subscription.
                 </AccordionContent>

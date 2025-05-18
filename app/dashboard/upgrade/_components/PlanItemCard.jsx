@@ -8,15 +8,15 @@ function PlanItemCard({plan}) {
     <div className="rounded-2xl border border-gray-200 p-6 shadow-sm sm:px-8 lg:p-12">
     <div className="text-center">
 
-      <h2 className="text-lg font-medium text-gray-900">
+      <h2 className="text-lg font-medium">
         {plan.name}
         <span className="sr-only">Plan</span>
       </h2>
 
       <p className="mt-2 sm:mt-4">
-        <strong className="text-3xl font-bold text-gray-900 sm:text-4xl"> {plan.cost}$ </strong>
+        <strong className="text-3xl font-bold sm:text-4xl"> {plan.cost}$ </strong>
 
-        <span className="text-sm font-medium text-gray-700">/month</span>
+        <span className="text-sm font-medium">/month</span>
       </p>
     </div>
 

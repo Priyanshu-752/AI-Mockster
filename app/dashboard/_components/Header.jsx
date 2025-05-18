@@ -4,6 +4,9 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import React, { useState } from 'react'
+import { useTheme } from 'next-themes'
+import { Moon, Sun } from 'lucide-react'
+import { Button } from '@/components/ui/button'
 
 function Header() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -19,6 +22,7 @@ function Header() {
         { href: '/dashboard/upgrade', label: 'Upgrade' },
         { href: '/how-it-works', label: 'How it Works?' }
     ];
+    const { theme, setTheme } = useTheme()
 
     return (
         <div className='relative'>
@@ -38,11 +42,19 @@ function Header() {
                         </Link>
                     ))}
                 </ul>
-<div className='flex flex-row gap-5 items-center'>
-
-                <div className=''>
-                    <UserButton/>
-                </div>
+                <div className='flex flex-row gap-5 items-center'>
+                    <Button
+                        variant="ghost"
+                        size="icon"
+                        onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+                    >
+                        <Sun className="h-5 w-5 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
+                        <Moon className="absolute h-5 w-5 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
+                        <span className="sr-only">Toggle theme</span>
+                    </Button>
+                    <div className=''>
+                        <UserButton/>
+                    </div>
                 {/* Mobile Menu Button */}
                 <button 
                     className='md:hidden text-gray-600 focus:outline-none'
