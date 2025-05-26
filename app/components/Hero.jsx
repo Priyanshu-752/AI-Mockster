@@ -5,11 +5,12 @@ import { motion } from "framer-motion";
 import { useCallback } from "react";
 import Particles from "react-tsparticles";
 import { loadFull } from "tsparticles";
+import Link from "next/link";
 
 // Animation variants
 const fadeIn = {
   hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
+  visible: { opacity: 1, y: 0, transition: { duration: 0.2 } }
 };
 
 export default function Hero() {
@@ -128,10 +129,12 @@ export default function Hero() {
             variants={fadeIn}
             className="flex flex-wrap gap-4 justify-center mt-10"
           >
+            <Link href={"/dashboard"}>
             <Button className="px-8 py-6 text-lg group bg-gradient-to-r from-primary to-purple-600" size="lg">
               Start Free Trial
               <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
             </Button>
+            </Link>
             <Button variant="outline" className="px-8 py-6 text-lg" size="lg">
               <Video className="mr-2 h-5 w-5" />
               Watch Demo
