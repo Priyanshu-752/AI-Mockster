@@ -24,7 +24,7 @@ export default function Hero() {
 
   return (
     <div className="relative">
-      {/* <Particles
+      <Particles
         id="tsparticles"
         init={particlesInit}
         options={{
@@ -94,7 +94,7 @@ export default function Hero() {
           },
           detectRetina: true
         }}
-      /> */}
+      /> 
       <div className="absolute inset-0 z-[-10] bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:20px_20px] opacity-30"></div>
       
       {/* Hero Content */}

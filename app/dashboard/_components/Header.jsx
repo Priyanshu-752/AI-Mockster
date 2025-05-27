@@ -25,7 +25,7 @@ function Header() {
     const { theme, setTheme } = useTheme()
 
     return (
-        <div className='relative'>
+        <div className='relative z-10'>
             <div className='flex p-5 items-center justify-between bg-secondary shadow-sm'>
                 <Image src={'/head.png'} width={130} height={0} alt='logo' />
                 

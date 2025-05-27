@@ -37,27 +37,28 @@ const staggerContainer = {
 };
 
 const testimonials = [
-  {
-    name: "John Doe",
-    role: "Software Engineer at Google",
-    image: "/head.png",
-    content: "This platform helped me land my dream job at Google! The AI feedback was incredibly accurate and helped me improve my technical interview skills.",
-    initials: "JD"
-  },
-  {
-    name: "Sarah Johnson",
-    role: "Product Manager at Microsoft",
-    image: "/head.png",
-    content: "After 5 failed interviews, I tried Ai Mockster and passed my next interview with flying colors. The personalized feedback made all the difference.",
-    initials: "SJ"
-  },
-  {
-    name: "Michael Chen",
-    role: "Data Scientist at Amazon",
-    image: "/head.png",
-    content: "The AI interviewer asked me questions that were almost identical to my actual interview. I felt so prepared and confident. Highly recommend!",
-    initials: "MC"
-  }
+{
+  name: "John Doe",
+  role: "Final Year CSE Student, IIT Delhi",
+  image: "/modi.png",
+  content: "This platform helped me crack my dream internship at a top tech company! The AI feedback was super accurate and really improved my technical interview skills.",
+  initials: "JD"
+},
+{
+  name: "Sarah Johnson",
+  role: "3rd Year Student, BITS Pilani",
+  image: "/team.png",
+  content: "After multiple failed interviews, I tried Ai Mockster and finally cleared one with confidence. The personalized feedback was a game changer for me.",
+  initials: "SJ"
+},
+{
+  name: "Michael Chen",
+  role: "M.Tech AI Student, IIIT Hyderabad",
+  image: "/bros.png",
+  content: "The AI interviewer asked me questions very similar to my actual internship interview. I felt prepared and confident. Highly recommend it to students!",
+  initials: "MC"
+}
+
 ];
 
 export default function Home() {
@@ -214,7 +215,7 @@ export default function Home() {
               <div className="p-6 space-y-4">
                 <div className="flex items-center">
                   <Check className="h-5 w-5 text-primary mr-3" />
-                  <span>3 Practice Interviews</span>
+                  <span>5 Practice Interviews</span>
                 </div>
                 <div className="flex items-center">
                   <Check className="h-5 w-5 text-primary mr-3" />
@@ -224,7 +225,7 @@ export default function Home() {
                   <Check className="h-5 w-5 text-primary mr-3" />
                   <span>Interview History</span>
                 </div>
-                <Button className="w-full mt-6 group">
+                <Button  className="w-full mt-6 group">
                   Start Free Trial
                   <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
                 </Button>
@@ -238,7 +239,7 @@ export default function Home() {
               <CardHeader>
                 <CardTitle className="text-2xl">Pro</CardTitle>
                 <div className="mt-4">
-                  <span className="text-4xl font-bold">$29</span>
+                  <span className="text-4xl font-bold">$7.99</span>
                   <span className="text-muted-foreground">/month</span>
                 </div>
                 <CardDescription className="mt-4">
@@ -275,7 +276,7 @@ export default function Home() {
               <CardHeader>
                 <CardTitle className="text-2xl">Enterprise</CardTitle>
                 <div className="mt-4">
-                  <span className="text-4xl font-bold">$99</span>
+                  <span className="text-4xl font-bold">$29</span>
                   <span className="text-muted-foreground">/month</span>
                 </div>
                 <CardDescription className="mt-4">
