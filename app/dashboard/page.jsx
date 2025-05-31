@@ -4,17 +4,19 @@ import React, { useState, useEffect } from 'react'
 import AddNewInterview from './_components/AddNewInterview'
 import InterviewList from './_components/InterviewList'
 import { db } from '@/utils/db'
-import { UserStatus } from '@/utils/schema'
+import { UserStatus, MockInterview } from '@/utils/schema'
 import { useUser } from '@clerk/nextjs'
 import { eq } from 'drizzle-orm'
 
 function Dashboard() {
   const [isPro, setIsPro] = useState(false);
+  const [interviewCount, setInterviewCount] = useState(0);
   const { user } = useUser();
 
   useEffect(() => {
     if (user) {
       checkProStatus();
+      getInterviewCount();
     }
   }, [user]);
 
@@ -23,6 +25,13 @@ function Dashboard() {
       .from(UserStatus)
       .where(eq(UserStatus.email, user?.primaryEmailAddress?.emailAddress));
     setIsPro(result[0]?.isPro || false);
+  }
+
+  const getInterviewCount = async () => {
+    const result = await db.select()
+      .from(MockInterview)
+      .where(eq(MockInterview.createdBy, user?.primaryEmailAddress?.emailAddress));
+    setInterviewCount(result.length);
   }
 
   return (
@@ -56,15 +65,24 @@ function Dashboard() {
                 Quick Actions
               </h2>
               <p className="text-gray-600 dark:text-gray-300">
-                {isPro ? 'Access all premium features' : 'Get started with your interview preparation'}
+                {isPro ? 'Access all premium features' : `${5 - interviewCount} free interviews remaining`}
               </p>
             </div>
           </div>
           
           <div className='grid grid-cols-1 md:grid-cols-3 gap-6'>
-            <AddNewInterview/>
+            <div className="relative">
+              <AddNewInterview/>
+              {!isPro && (
+                <div className="absolute top-4 right-4">
+                  <span className="bg-primary/10 text-primary text-sm font-medium px-2.5 py-0.5 rounded-full">
+                    {5 - interviewCount} left
+                  </span>
+                </div>
+              )}
+            </div>
             
-            {/* Analytics Card */}
+            {/* Additional Quick Action Cards */}
             <div className="bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 rounded-xl p-6 border border-blue-200 dark:border-blue-800">
               <div className='flex flex-row items-center gap-3'>
                 <div className="w-12 h-12 bg-blue-100 dark:bg-blue-800 rounded-lg flex items-center justify-center mb-4">
@@ -73,7 +91,7 @@ function Dashboard() {
                 <h3 className="font-semibold text-gray-900 dark:text-white mb-2">View Analytics</h3>
               </div>
               <p className="text-sm text-gray-600 dark:text-gray-300 mb-4">
-                {isPro ? 'Access detailed performance analytics and insights' : 'Track your basic progress metrics'}
+              Coming Soon...
               </p>
             </div>
 
