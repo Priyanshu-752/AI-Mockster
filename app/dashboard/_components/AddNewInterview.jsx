@@ -1,5 +1,5 @@
 "use client"
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import {
     Dialog,
     DialogContent,
@@ -7,18 +7,19 @@ import {
     DialogHeader,
     DialogTitle,
     DialogTrigger,
-  } from "@/components/ui/dialog"
+} from "@/components/ui/dialog"
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
 import { chatSession } from '@/utils/GeminiAIModal'
 import { LoaderCircle } from 'lucide-react'
 import { db } from '@/utils/db'
-import { MockInterview } from '@/utils/schema'
-import { v4 as uuidv4 } from 'uuid';
+import { MockInterview, UserStatus } from '@/utils/schema'
+import { v4 as uuidv4 } from 'uuid'
 import { useUser } from '@clerk/nextjs'
 import moment from 'moment'
 import { useRouter } from 'next/navigation'
+import { eq } from 'drizzle-orm'
 
 function AddNewInterview() {
     const [openDailog,setOpenDailog]=useState(false)
@@ -27,8 +28,32 @@ function AddNewInterview() {
     const [jobExperience,setJobExperience]=useState();
     const [loading,setLoading]=useState(false);
     const [jsonResponse,setJsonResponse]=useState([]);
+    const [interviewCount, setInterviewCount] = useState(0);
     const router=useRouter();
     const {user}=useUser();
+    const [isPro, setIsPro] = useState(false);
+
+    useEffect(() => {
+        if (user) {
+            getInterviewCount();
+            checkProStatus();
+        }
+    }, [user]);
+
+    const checkProStatus = async () => {
+        const result = await db.select()
+            .from(UserStatus)
+            .where(eq(UserStatus.email, user?.primaryEmailAddress?.emailAddress));
+        setIsPro(result[0]?.isPro || false);
+    }
+
+    // Modify the interview count check to consider pro status
+    const getInterviewCount = async () => {
+        const result = await db.select()
+            .from(MockInterview)
+            .where(eq(MockInterview.createdBy, user?.primaryEmailAddress?.emailAddress));
+        setInterviewCount(isPro ? 0 : result.length); // Pro users don't have a limit
+    }
     const onSubmit=async(e)=>{
         setLoading(true)
         e.preventDefault()
@@ -38,7 +63,7 @@ function AddNewInterview() {
 
         const result=await chatSession.sendMessage(InputPrompt);
         const MockJsonResp=(result.response.text()).replace('```json','').replace('```','')
-        console.log(JSON.parse(MockJsonResp));
+        // console.log(JSON.parse(MockJsonResp));
         setJsonResponse(MockJsonResp);
 
         if(MockJsonResp)
@@ -68,14 +93,20 @@ function AddNewInterview() {
     }
   return (
     <div>
-        <div className='p-10 border rounded-lg bg-secondary
-        hover:scale-105 hover:shadow-md cursor-pointer
-         transition-all border-dashed'
-         onClick={()=>setOpenDailog(true)}
-         >
-            <h2 className='text-lg text-center'>+ Add New</h2>
+        <div 
+            className={`p-10 border rounded-lg ${(!isPro && interviewCount >= 5) ? 'bg-gray-100 cursor-not-allowed' : 'bg-secondary hover:scale-105 hover:shadow-md cursor-pointer'} transition-all border-dashed`}
+            onClick={() => (isPro || interviewCount < 5) && setOpenDailog(true)}
+        >
+            {(!isPro && interviewCount >= 5) ? (
+                <div className="text-center">
+                    <h2 className="text-lg text-gray-500">Upgrade Required</h2>
+                    <p className="text-sm text-gray-400">Become a pro member to access more features</p>
+                </div>
+            ) : (
+                <h2 className="text-lg text-center">+ Add New</h2>
+            )}
         </div>
-        <Dialog open={openDailog}>
+        <Dialog open={openDailog} onOpenChange={setOpenDailog}>
        
         <DialogContent className="max-w-2xl">
             <DialogHeader >
